@@ -1,8 +1,6 @@
 var express = require('express')
 	, app = express();
 
-app.get('/', function(req, res) {
-	res.send('ok api');
-});
+app.use('/hubs', require('./src/hubs'));
 
 module.exports = app;
