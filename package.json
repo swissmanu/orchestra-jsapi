@@ -5,6 +5,14 @@
   "main": "index.js",
   "author": "Manuel Alabor <manuel@alabor.me>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swissmanu/orchestra-api"
+  },
+  "bugs": {
+    "url": "https://github.com/swissmanu/orchestra-api/issues"
+  },
+  "homepage": "https://github.com/swissmanu/orchestra-api",
   "dependencies": {
     "express": "^4.10.6",
     "harmonyhubjs-client": "^1.1.2",
