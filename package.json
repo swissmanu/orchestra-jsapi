@@ -1,0 +1,13 @@
+{
+  "name": "orchestra-api",
+  "version": "0.0.1",
+  "description": "REST API server for the orchestra-client.",
+  "main": "index.js",
+  "author": "Manuel Alabor <manuel@alabor.me>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.10.6",
+    "harmonyhubjs-client": "^1.1.2",
+    "harmonyhubjs-discover": "^1.0.0"
+  }
+}
