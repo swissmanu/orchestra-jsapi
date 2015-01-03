@@ -18,6 +18,7 @@
     "harmonyhubjs-client": "^1.1.2",
     "harmonyhubjs-discover": "^1.0.0",
     "primus": "^2.4.12",
+    "q": "^1.1.2",
     "websockets": "^0.2.0"
   }
 }
