@@ -16,6 +16,8 @@
   "dependencies": {
     "express": "^4.10.6",
     "harmonyhubjs-client": "^1.1.2",
-    "harmonyhubjs-discover": "^1.0.0"
+    "harmonyhubjs-discover": "^1.0.0",
+    "primus": "^2.4.12",
+    "websockets": "^0.2.0"
   }
 }
