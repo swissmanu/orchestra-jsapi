@@ -60,4 +60,24 @@ app.get('/:uuid/activities', function(req, res) {
 	}
 });
 
+app.post('/:uuid/activities/:id/on', function(req, res) {
+	var uuid = req.params.uuid
+		, id = req.params.id
+		, hub = hubs.filter(function(hub) { return (hub.uuid === uuid); });
+	
+	debug('trigger activity ' + id + ' for hub with uuid ' + req.params.uuid);
+
+	if(hub.length > 0) {
+		hub = hub[0];
+
+		getClientForHub(hub)
+			.then(function(client) {
+				client.startActivity(id);
+				res.sendStatus(200);
+			});
+	} else {
+		throw new Error('Cannot trigger activity ' + id + ' for hub ' + uuid);
+	}	
+});
+
 module.exports = app;
