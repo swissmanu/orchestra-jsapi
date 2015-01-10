@@ -1,4 +1,4 @@
-var debug = require('debug')('orchestra:api:hubs')
+var debug = require('debug')('orchestra:api:rest:hubs')
 	, app = require('express')()
 	, q = require('q')
 	, discover = new (require('harmonyhubjs-discover'))(61991)
