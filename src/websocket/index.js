@@ -54,7 +54,10 @@ module.exports = function(universe, httpServer) {
 
 	primus.save('primus.js');
 
-	[ new (require('./discoveredHubs'))(universe) ]
+	[
+		new (require('./discoveredHubs'))(universe)
+		, new (require('./stateDigest'))(universe)
+	]
 		.forEach(function(publisher) {
 			publisher.on('publish', onPublishFromTopicPublisher.bind(null, sparks));
 		});

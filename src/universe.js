@@ -54,6 +54,13 @@ Universe.prototype.getClientForHub = function getClientForHub(hub) {
 				debug('created new client for hub with uuid ' + hub.uuid);
 				self._clients[hub.uuid] = client;
 
+				client.on('stateDigest', function(stateDigest) {
+					self.emit('stateDigest', {
+						hub: hub
+						, stateDigest: stateDigest
+					});
+				});
+
 				return client;
 			});
 	} else {
