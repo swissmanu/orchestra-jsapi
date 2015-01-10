@@ -12,7 +12,9 @@ restApi(app);
 // Expose two properties:
 //  - restApi with the express api app
 //  - webSocketApi function that takes an http server, ready to be attached to a primus instance.
+//  - webSocketApiConfig object, used to configure primus. helpful to generate the primus client library.
 module.exports = {
 	restApi: app
 	, webSocketApi: webSocketApi.bind(null, universe)
+	, webSocketApiConfig: require('./src/websocket/config')
 };

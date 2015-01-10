@@ -19,20 +19,20 @@ function unregisterSpark(spark) {
 	sparks[spark.id] = undefined;
 }
 
-function onPublishFromTopicPublisher(sparks, message) {
-	Object.keys(sparks).forEach(function(sparkId) {
-		var spark = sparks[sparkId]
-			, sparkSubscribedTopic = spark.subscribedTopics.some(function(topic) {
+function onPublishFromTopicPublisher(knownSparks, message) {
+	Object.keys(knownSparks).forEach(function(sparkId) {
+		var knownSpark = knownSparks[sparkId]
+			, sparkSubscribedTopic = knownSpark.subscribedTopics.some(function(topic) {
 				return topic === message.topic;
 			});
 
 		if(sparkSubscribedTopic) {
-			spark.write(message);
+			knownSpark.spark.write(message);
 		}
 	});
 }
 
-function onDataFromSpark(data) {
+function onDataFromSpark(spark, data) {
 	debug('onDataFromSpark(' + data + ')');
 
 	if(isObject(data) && isString(data.action) && isString(data.topic)) {
@@ -49,7 +49,10 @@ function onDataFromSpark(data) {
 
 module.exports = function(universe, httpServer) {
 	debug('setup primus on http server');
-	var primus = new Primus(httpServer);
+	var primusConfig = require('./config')
+		, primus = new Primus(httpServer, primusConfig);
+
+	primus.save('primus.js');
 
 	[ new (require('./discoveredHubs'))(universe) ]
 		.forEach(function(publisher) {
@@ -58,8 +61,8 @@ module.exports = function(universe, httpServer) {
 
 	primus.on('connection', function(spark) {
 		debug('new connection from spark ' + spark.id);
-		registerNewSpark(spark);
-		spark.on('data', onDataFromSpark);
+		registerNewSpark.call(spark, spark);
+		spark.on('data', onDataFromSpark.bind(spark, spark));
 	});
 
 	primus.on('disconnect', function(spark) {
