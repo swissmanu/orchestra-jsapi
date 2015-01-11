@@ -53,8 +53,13 @@ Universe.prototype.getClientForHub = function getClientForHub(hub) {
 			.then(function(client) {
 				debug('created new client for hub with uuid ' + hub.uuid);
 
-				client._xmppClient.connection.socket.setKeepAlive(true, 10000);
+				client._xmppClient.on('offline', function() {
+					debug('client for hub ' + hub.uuid + ' went offline. clean up.');
+					self._clients[hub.uuid] = undefined;
+				});
+
 				client.on('stateDigest', function(stateDigest) {
+					debug('got state digest. reemit it');
 					self.emit('stateDigest', {
 						hub: hub
 						, stateDigest: stateDigest
