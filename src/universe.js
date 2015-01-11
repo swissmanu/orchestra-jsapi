@@ -52,8 +52,8 @@ Universe.prototype.getClientForHub = function getClientForHub(hub) {
 		return Client(hub.ip)
 			.then(function(client) {
 				debug('created new client for hub with uuid ' + hub.uuid);
-				self._clients[hub.uuid] = client;
 
+				client._xmppClient.connection.socket.setKeepAlive(true, 10000);
 				client.on('stateDigest', function(stateDigest) {
 					self.emit('stateDigest', {
 						hub: hub
@@ -61,6 +61,7 @@ Universe.prototype.getClientForHub = function getClientForHub(hub) {
 					});
 				});
 
+				self._clients[hub.uuid] = client;
 				return client;
 			});
 	} else {
