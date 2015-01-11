@@ -23,6 +23,32 @@ var Universe = function() {
 };
 util.inherits(Universe, EventEmitter);
 
+
+function createClientForHub(hub) {
+	var self = this;
+
+	return Client(hub.ip)
+		.then(function(client) {
+			debug('created new client for hub with uuid ' + hub.uuid);
+
+			client._xmppClient.on('offline', function() {
+				debug('client for hub ' + hub.uuid + ' went offline. re-establish.');
+				return createClientForHub.call(self, hub);
+			});
+
+			client.on('stateDigest', function(stateDigest) {
+				debug('got state digest. reemit it');
+				self.emit('stateDigest', {
+					hub: hub
+					, stateDigest: stateDigest
+				});
+			});
+
+			self._clients[hub.uuid] = client;
+			return client;
+		});
+}
+
 Universe.prototype.getDiscoveredHubs = function getDiscoveredHubs() {
 	debug('return list of ' + this._discoveredHubs.length + ' discovered hubs');
 	return this._discoveredHubs;
@@ -44,34 +70,12 @@ Universe.prototype.getClientForHubWithUuid = function getClientForHubWithUuid(uu
 Universe.prototype.getClientForHub = function getClientForHub(hub) {
 	debug('getClientForHub(' + hub.uuid + ')');
 
-	var self = this;
-
-	if(!self._clients[hub.uuid]) {
+	if(!this._clients[hub.uuid]) {
 		debug('request new client for hub with uuid ' + hub.uuid);
-
-		return Client(hub.ip)
-			.then(function(client) {
-				debug('created new client for hub with uuid ' + hub.uuid);
-
-				client._xmppClient.on('offline', function() {
-					debug('client for hub ' + hub.uuid + ' went offline. clean up.');
-					self._clients[hub.uuid] = undefined;
-				});
-
-				client.on('stateDigest', function(stateDigest) {
-					debug('got state digest. reemit it');
-					self.emit('stateDigest', {
-						hub: hub
-						, stateDigest: stateDigest
-					});
-				});
-
-				self._clients[hub.uuid] = client;
-				return client;
-			});
+		return createClientForHub.call(this, hub);
 	} else {
 		debug('return existing client for hub with uuid ' + hub.uuid);
-		return q.when(self._clients[hub.uuid]);
+		return q.when(this._clients[hub.uuid]);
 	}
 };
 
