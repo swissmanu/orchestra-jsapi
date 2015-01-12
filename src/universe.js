@@ -33,6 +33,7 @@ function createClientForHub(hub) {
 
 			client._xmppClient.on('offline', function() {
 				debug('client for hub ' + hub.uuid + ' went offline. re-establish.');
+				self._clients[hub.uuid] = undefined;
 				return createClientForHub.call(self, hub);
 			});
 
