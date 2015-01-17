@@ -27,6 +27,7 @@ function onPublishFromTopicPublisher(knownSparks, message) {
 			});
 
 		if(sparkSubscribedTopic) {
+			debug('publish ' + message.topic + ' to ' + sparkId);
 			knownSpark.spark.write(message);
 		}
 	});
