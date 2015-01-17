@@ -53,8 +53,6 @@ module.exports = function(universe, httpServer) {
 	var primusConfig = require('./config')
 		, primus = new Primus(httpServer, primusConfig);
 
-	primus.save('primus.js');
-
 	[
 		new (require('./discoveredHubs'))(universe)
 		, new (require('./stateDigest'))(universe)
