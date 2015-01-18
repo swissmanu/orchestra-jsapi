@@ -1,6 +1,8 @@
-# orchestra-api
+# orchestra-jsapi
 
-An API for [harmonyhubjs-client](https://github.com/swissmanu/harmonyhubjs-client) and [harmonyhubjs-discover](https://github.com/swissmanu/harmonyhubjs-discover) based upon current web technologies (REST and WebSockets).
+`orchestra-jsapi` abstracts the functionality provided by [harmonyhubjs-client](https://github.com/swissmanu/harmonyhubjs-client) and [harmonyhubjs-discover](https://github.com/swissmanu/harmonyhubjs-discover) behind a vanilla JavaScript interface. Doing this, interaction with Logitechs Harmony hubs becomes a breeze for every Node.JS developer.
 
-There is an HTML client known as [orchestra-client](https://github.com/swissmanu/orchestra-client) available.
-[orchestra](https://github.com/swissmanu/orchestra) combines the API and the client into a nice desktop application.
+
+## Usages
+* [orchestra](https://github.com/swissmanu/orchestra) uses `orchestra-jsapi` for interaction with Logitech Harmony hubs.
+* There is an additional module called [orchestra-webapi](https://github.com/swissmanu/orchestra-webapi) which forwards `orchestra-jsapi` functions via REST and WebSockets.
