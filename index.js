@@ -52,20 +52,45 @@ function createClientForHub(hub) {
 
 Universe.prototype.getDiscoveredHubs = function getDiscoveredHubs() {
 	debug('return list of ' + this._discoveredHubs.length + ' discovered hubs');
-	return this._discoveredHubs;
+	return q.when(this._discoveredHubs);
+};
+
+Universe.prototype.getActivitiesForHubWithUuid = function getActivitiesForHubWithUuid(uuid) {
+	return this.getClientForHubWithUuid(uuid)
+		.then(function(client) {
+			return client.getActivities();
+		});
+};
+
+Universe.prototype.getCurrentActivityForHub = function getCurrentActivityForHub(uuid) {
+	return this.getClientForHubWithUuid(uuid)
+		.then(function(client) {
+			return client.getCurrentActivity()
+		})
+};
+
+Universe.prototype.startActivityForHub = function startActivityForHub(hubUuid, activityId) {
+	return this.getClientForHubWithUuid(hubUuid)
+		.then(function(client) {
+			return client.startActivity(activityId);
+		});
 };
 
 Universe.prototype.getClientForHubWithUuid = function getClientForHubWithUuid(uuid) {
 	debug('getClientForHubWithUuid(' + uuid + ')');
 
-	var hub = this.getDiscoveredHubs()
-		.filter(function(hub) { return (hub.uuid === uuid); });
+	var self = this;
 
-	if(hub.length > 0) {
-		return this.getClientForHub(hub[0]);
-	} else {
-		return q.reject(new Error('no hub with uuid ' + uuid + ' discovered yet'));
-	}
+	return this.getDiscoveredHubs()
+		.then(function(hubs) {
+			hubs = hubs.filter(function(hub) { return (hub.uuid === uuid); });
+
+			if(hubs.length > 0) {
+				return self.getClientForHub(hubs[0]);
+			} else {
+				throw new Error('no hub with uuid ' + uuid + ' discovered yet');
+			}
+		});
 };
 
 Universe.prototype.getClientForHub = function getClientForHub(hub) {
