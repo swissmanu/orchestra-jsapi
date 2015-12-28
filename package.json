@@ -18,7 +18,7 @@
   "homepage": "https://github.com/swissmanu/orchestra-jsapi",
   "dependencies": {
     "debug": "^2.1.1",
-    "harmonyhubjs-client": "^1.1.6",
+    "harmonyhubjs-client": "^1.1.7",
     "harmonyhubjs-discover": "^1.0.2",
     "q": "^1.1.2"
   },
