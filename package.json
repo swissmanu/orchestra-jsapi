@@ -1,6 +1,6 @@
 {
   "name": "orchestra-jsapi",
-  "version": "0.0.2",
+  "version": "0.0.0-semantically-released",
   "description": "Vanilla interface layer for harmonyhubjs-* libraries. Leveraged by orchestra and orchestra-webapi.",
   "main": "index.js",
   "author": "Manuel Alabor <manuel@alabor.me>",
@@ -12,11 +12,23 @@
   "bugs": {
     "url": "https://github.com/swissmanu/orchestra-jsapi/issues"
   },
+  "scripts": {
+    "test": "standard"
+  },
   "homepage": "https://github.com/swissmanu/orchestra-jsapi",
   "dependencies": {
     "debug": "^2.1.1",
-    "harmonyhubjs-client": "^1.1.5",
-    "harmonyhubjs-discover": "^1.0.0",
+    "harmonyhubjs-client": "^1.1.6",
+    "harmonyhubjs-discover": "^1.0.2",
     "q": "^1.1.2"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^1.1.5",
+    "standard": "^5.4.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
