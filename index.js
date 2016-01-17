@@ -17,6 +17,14 @@ var Universe = function () {
     self._discoveredHubs = hubs
     self.emit('discoveredHubs', hubs)
   })
+
+  self._discover.on('online', function (hub) {
+    self.emit('hubOnline', hub)
+  })
+
+  self._discover.on('offline', function (hub) {
+    self.emit('hubOffline', hub)
+  })
   self._discover.start()
 
   EventEmitter.call(self)
