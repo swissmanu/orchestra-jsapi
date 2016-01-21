@@ -30,7 +30,7 @@ function createClientForHub (hub) {
     })
 }
 
-export default class Universe extends EventEmitter {
+export default class JsApi extends EventEmitter {
   constructor () {
     super()
     var self = this
