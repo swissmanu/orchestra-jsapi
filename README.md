@@ -3,6 +3,7 @@
 
 `orchestra-jsapi` abstracts the functionality provided by [harmonyhubjs-client](https://github.com/swissmanu/harmonyhubjs-client) and [harmonyhubjs-discover](https://github.com/swissmanu/harmonyhubjs-discover) behind a vanilla JavaScript interface. Using an `EventEmitter` and a simple promise based API, interaction with Logitechs Harmony hubs becomes a breeze for every Node.JS developer.
 
+The source code is written in ES2015, but using [Babel](https://babeljs.io/) available in pure ECMAScript 5 from `npm`.
 
 ## Usages
 * [orchestra](https://github.com/swissmanu/orchestra) uses `orchestra-jsapi` for interaction with Logitech Harmony hubs.
