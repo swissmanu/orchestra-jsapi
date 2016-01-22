@@ -4,7 +4,6 @@ var debug = require('debug')('orchestra:jsapi')
 var Discover = require('harmonyhubjs-discover')
 var Client = require('harmonyhubjs-client')
 var EventEmitter = require('events').EventEmitter
-var q = require('q')
 
 function createClientForHub (hub) {
   var self = this
@@ -59,7 +58,7 @@ class JsApi extends EventEmitter {
 
   getDiscoveredHubs () {
     debug('return list of ' + this._discoveredHubs.length + ' discovered hubs')
-    return q.when(this._discoveredHubs)
+    return Promise.resolve(this._discoveredHubs)
   }
 
   getActivitiesForHubWithUuid (hubUuid) {
@@ -121,7 +120,7 @@ class JsApi extends EventEmitter {
       return createClientForHub.call(this, hub)
     } else {
       debug('return existing client for hub' + hub.uuid)
-      return q.when(this._clients[hub.uuid])
+      return Promise.resolve(this._clients[hub.uuid])
     }
   }
 }

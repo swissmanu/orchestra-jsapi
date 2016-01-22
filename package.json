@@ -21,8 +21,7 @@
   "dependencies": {
     "debug": "^2.1.1",
     "harmonyhubjs-client": "^1.1.8",
-    "harmonyhubjs-discover": "^1.0.2",
-    "q": "^1.1.2"
+    "harmonyhubjs-discover": "^1.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
