@@ -55,8 +55,6 @@ class JsApi extends EventEmitter {
       self.emit('hubOffline', hub)
     })
     self._discover.start()
-
-    EventEmitter.call(self)
   }
 
   getDiscoveredHubs () {
