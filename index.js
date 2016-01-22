@@ -1,3 +1,5 @@
+'use strict'
+
 var debug = require('debug')('orchestra:jsapi')
 var Discover = require('harmonyhubjs-discover')
 var Client = require('harmonyhubjs-client')
@@ -30,7 +32,7 @@ function createClientForHub (hub) {
     })
 }
 
-export default class JsApi extends EventEmitter {
+export class JsApi extends EventEmitter {
   constructor () {
     super()
     var self = this

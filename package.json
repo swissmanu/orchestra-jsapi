@@ -12,7 +12,7 @@
     "url": "https://github.com/swissmanu/orchestra-jsapi/issues"
   },
   "scripts": {
-    "test": "standard",
+    "test": "standard index.js test/**/*.js && npm run build && node test/support/runner.js",
     "build": "rm -fr dist && mkdir dist && babel --presets es2015 --out-file dist/index.js index.js",
     "semantic-release": "semantic-release pre && npm run build && npm publish && semantic-release post",
     "docs": "jsdoc -c .jsdoc.json && sed -i '' 's/<title>JSDoc/<title>orchestra-jsapi Documentation/g' docs/*.html"
@@ -28,7 +28,10 @@
     "babel-cli": "^6.4.5",
     "babel-preset-es2015": "^6.3.13",
     "cz-conventional-changelog": "^1.1.5",
+    "jasmine": "^2.4.1",
+    "jasmine-spec-reporter": "^2.4.0",
     "jsdoc": "^3.4.0",
+    "mock-require": "^1.2.1",
     "semantic-release": "^4.3.5",
     "standard": "^5.4.1"
   },
