@@ -32,7 +32,7 @@ function createClientForHub (hub) {
     })
 }
 
-export class JsApi extends EventEmitter {
+class JsApi extends EventEmitter {
   constructor () {
     super()
     var self = this
@@ -127,3 +127,5 @@ export class JsApi extends EventEmitter {
     }
   }
 }
+
+module.exports = JsApi

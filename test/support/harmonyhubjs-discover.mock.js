@@ -1,9 +1,13 @@
 'use strict'
 
 /* global jasmine */
-const DiscoverMock = () => {
-  Object.assign(this, jasmine.createSpyObj('Discover', ['a']))
-  return this
+class DiscoverMock {
+  constructor () {
+    this.constructorArguments = Array.prototype.slice.call(arguments)
+
+    this.on = jasmine.createSpy('on')
+    this.start = jasmine.createSpy('start')
+  }
 }
 
-module.export = DiscoverMock
+module.exports = DiscoverMock
