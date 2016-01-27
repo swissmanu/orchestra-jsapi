@@ -65,7 +65,7 @@ function createClientForHub (hub) {
  *   <dt>`stateDigest`<dt>
  *   <dd>
  *     This event notifies about a change of the state of a specific hub. You
- *     can expect an object like `{ hub: { ... }, stateDigest: { ... } }` as
+ *     can expect an object like `{ hub: { ... }, stateDigest: { ... } }` as
  *     payload. The `stateDigest` property will contain information as described
  *     in the [stateDigest Event Documentation](https://github.com/swissmanu/harmonyhubjs-client/blob/master/docs/protocol/stateDigest.md)
  *     by harmonyhubjs-client.
