@@ -164,6 +164,19 @@ class JsApi extends EventEmitter {
       })
   }
 
+  /**
+   * Executes an action for a specific hub with given UUID. `action` is a string
+   * provided by an activities `controlGroups`. Use
+   * {@link JsApi#getActivitiesForHubWithUuid} to learn more about the available
+   * control groups and actions of an activity.
+   *
+   * @param {String} hubUuid The UUID of the hub to execute an action for.
+   * @param {String} action A string as described of a control group of an
+   *                        activity. Do not modify the information exposed from
+   *                        the hub. This function will handle any escaping for
+   *                        you.
+   * @return {Promise}
+   */
   executeAction (hubUuid, action) {
     debug('execute action ' + action + ' for hub ' + hubUuid)
     var encodedAction = 'action=' + action.replace(/\:/g, '::') + ':status=press'
