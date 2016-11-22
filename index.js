@@ -125,4 +125,15 @@ Universe.prototype.getClientForHub = function getClientForHub (hub) {
   }
 }
 
+Universe.prototype.shutdown = function shutdown () {
+  debug('Shutdown universe')
+  var self = this
+
+  self._discover.stop()
+  Object
+    .keys(self._clients)
+    .map(function (key) { return self._clients[key] })
+    .forEach(function (client) { client.close() })
+}
+
 module.exports = Universe
